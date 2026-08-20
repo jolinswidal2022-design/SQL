@@ -72,6 +72,20 @@ select account_name,
 from journal_entry
 group by account_name
 having count(*)>1;
+SELECT
+     account_name,
+     case
+	     when sum(debit)>sum(credit)
+         then sum(debit)-sum(credit)
+		 else 0 
+     end as debit_balance,
+     case 
+         when sum(credit)>sum(debit)
+         then sum(credit)-sum(debit)
+	     else 0 
+     end as credit_balance
+from journal_entry
+group by account_name;
 
 
 
