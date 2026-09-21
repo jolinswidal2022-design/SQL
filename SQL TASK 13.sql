@@ -1,0 +1,40 @@
+create database jolin22;
+use jolin22;
+CREATE TABLE Customers (
+     customer_id INT PRIMARY KEY,
+	 customer_name VARCHAR(50),
+     email VARCHAR(100)
+);
+CREATE TABLE transactions (
+      transaction_id INT PRIMARY KEY,
+      customer_id INT,
+      amount DECIMAL(10,2),
+      transaction_date DATE,
+      FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+CREATE TABLE salaries (
+      employee_id INT PRIMARY KEY,
+      employee_name VARCHAR(50),
+      salary DECIMAL(10,2)
+);
+CREATE USER 'MANAGER'@'LOCALHOST' IDENTIFIED BY 'MANAGER@123';
+CREATE USER 'ACCOUNTANT'@'LOCALHOST' IDENTIFIED BY 'ACCOUNT@123';
+CREATE USER 'CLERK'@'LOCALHOST' IDENTIFIED BY 'CLERK@123';
+GRANT SELECT ON permission.*
+TO 'MANAGER'@'LOCALHOST';
+GRANT SELECT, INSERT, UPDATE
+ON jolin22.transactions
+TO 'ACCOUNTANT'@'LOCALHOST';
+GRANT SELECT
+ON jolin22.customers
+TO  'CLERK'@'LOCALHOST';
+GRANT DELETE
+ON jolin22.transactions
+TO 'ACCOUNTANT'@'LOCALHOST';
+REVOKE DELETE
+ON jolin22.transactions
+FROM 'ACCOUNTANT'@'LOCALHOST';
+SHOW GRANTS FOR 'MANAGER'@'LOCALHOST';
+SHOW GRANTS FOR 'ACCOUNTANT'@'LOCALHOST';
+SHOW GRANTS FOR 'CLERK'@'LOCALHOST';
+
