@@ -1,4 +1,4 @@
-use my_andrea;
+use my_sweedal;
 CREATE DATABASE Financial_DB;
 USE FinancialDB;
 CREATE TABLE Customers311 (
